@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="kod-jvm-1.0-SNAPSHOT">
+    <output-path>$PROJECT_DIR$/build/libs</output-path>
+    <root id="archive" name="kod-jvm-1.0-SNAPSHOT.jar">
+      <element id="module-output" name="kod.jvmMain" />
+    </root>
+  </artifact>
+</component>

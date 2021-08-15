@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="schema-commons-jvm-1.0-SNAPSHOT">
+    <output-path>$PROJECT_DIR$/schema-commons/build/libs</output-path>
+    <root id="archive" name="schema-commons-jvm-1.0-SNAPSHOT.jar">
+      <element id="module-output" name="kod.schema-commons.jvmMain" />
+    </root>
+  </artifact>
+</component>

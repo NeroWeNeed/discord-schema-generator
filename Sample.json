@@ -1,0 +1,881 @@
+[
+  {
+    "type": "structure",
+    "name": "application-object-application-structure",
+    "items": [
+      {
+        "fieldName": "id",
+        "fieldType": "snowflake",
+        "description": "the id of the app"
+      },
+      {
+        "fieldName": "name",
+        "fieldType": "string",
+        "description": "the name of the app"
+      },
+      {
+        "fieldName": "icon",
+        "fieldType": "?string",
+        "description": "the icon hash of the app"
+      },
+      {
+        "fieldName": "description",
+        "fieldType": "string",
+        "description": "the description of the app"
+      },
+      {
+        "fieldName": "rpc_origins?",
+        "fieldType": "array of strings",
+        "description": "an array of rpc origin urls, if rpc is enabled"
+      },
+      {
+        "fieldName": "bot_public",
+        "fieldType": "boolean",
+        "description": "when false only app owner can join the app's bot to guilds"
+      },
+      {
+        "fieldName": "bot_require_code_grant",
+        "fieldType": "boolean",
+        "description": "when true the app's bot will only join upon completion of the full oauth2 code grant flow"
+      },
+      {
+        "fieldName": "terms_of_service_url?",
+        "fieldType": "string",
+        "description": "the url of the app's terms of service"
+      },
+      {
+        "fieldName": "privacy_policy_url?",
+        "fieldType": "string",
+        "description": "the url of the app's privacy policy"
+      },
+      {
+        "fieldName": "owner?",
+        "fieldType": "partial user object",
+        "description": "partial user object containing info on the owner of the application"
+      },
+      {
+        "fieldName": "summary",
+        "fieldType": "string",
+        "description": "if this application is a game sold on Discord, this field will be the summary field for the store page of its primary sku"
+      },
+      {
+        "fieldName": "verify_key",
+        "fieldType": "string",
+        "description": "the hex encoded key for verification in interactions and the GameSDK's GetTicket"
+      },
+      {
+        "fieldName": "team",
+        "fieldType": "?team object",
+        "description": "if the application belongs to a team, this will be a list of the members of that team"
+      },
+      {
+        "fieldName": "guild_id?",
+        "fieldType": "snowflake",
+        "description": "if this application is a game sold on Discord, this field will be the guild to which it has been linked"
+      },
+      {
+        "fieldName": "primary_sku_id?",
+        "fieldType": "snowflake",
+        "description": "if this application is a game sold on Discord, this field will be the id of the \"Game SKU\" that is created, if exists"
+      },
+      {
+        "fieldName": "slug?",
+        "fieldType": "string",
+        "description": "if this application is a game sold on Discord, this field will be the URL slug that links to the store page"
+      },
+      {
+        "fieldName": "cover_image?",
+        "fieldType": "string",
+        "description": "the application's default rich presence invite cover image hash"
+      },
+      {
+        "fieldName": "flags?",
+        "fieldType": "integer",
+        "description": "the application's public flags"
+      }
+    ]
+  },
+  {
+    "type": "flags",
+    "name": "application-object-application-flags",
+    "flags": [
+      {
+        "bit": 12,
+        "name": "GATEWAY_PRESENCE"
+      },
+      {
+        "bit": 13,
+        "name": "GATEWAY_PRESENCE_LIMITED"
+      },
+      {
+        "bit": 14,
+        "name": "GATEWAY_GUILD_MEMBERS"
+      },
+      {
+        "bit": 15,
+        "name": "GATEWAY_GUILD_MEMBERS_LIMITED"
+      },
+      {
+        "bit": 16,
+        "name": "VERIFICATION_PENDING_GUILD_LIMIT"
+      },
+      {
+        "bit": 17,
+        "name": "EMBEDDED"
+      }
+    ]
+  },
+  {
+    "type": "structure",
+    "name": "guild-object-guild-structure",
+    "items": [
+      {
+        "fieldName": "id",
+        "fieldType": "snowflake",
+        "description": "guild id"
+      },
+      {
+        "fieldName": "name",
+        "fieldType": "string",
+        "description": "guild name (2-100 characters, excluding trailing and leading whitespace)"
+      },
+      {
+        "fieldName": "icon",
+        "fieldType": "?string",
+        "description": "icon hash"
+      },
+      {
+        "fieldName": "icon_hash?",
+        "fieldType": "?string",
+        "description": "icon hash, returned when in the template object"
+      },
+      {
+        "fieldName": "splash",
+        "fieldType": "?string",
+        "description": "splash hash"
+      },
+      {
+        "fieldName": "discovery_splash",
+        "fieldType": "?string",
+        "description": "discovery splash hash; only present for guilds with the \"DISCOVERABLE\" feature"
+      },
+      {
+        "fieldName": "owner? **",
+        "fieldType": "boolean",
+        "description": "true if the user is the owner of the guild"
+      },
+      {
+        "fieldName": "owner_id",
+        "fieldType": "snowflake",
+        "description": "id of owner"
+      },
+      {
+        "fieldName": "permissions? **",
+        "fieldType": "string",
+        "description": "total permissions for the user in the guild (excludes overwrites)"
+      },
+      {
+        "fieldName": "region? ***",
+        "fieldType": "?string",
+        "description": "voice region id for the guild (deprecated)"
+      },
+      {
+        "fieldName": "afk_channel_id",
+        "fieldType": "?snowflake",
+        "description": "id of afk channel"
+      },
+      {
+        "fieldName": "afk_timeout",
+        "fieldType": "integer",
+        "description": "afk timeout in seconds"
+      },
+      {
+        "fieldName": "widget_enabled?",
+        "fieldType": "boolean",
+        "description": "true if the server widget is enabled"
+      },
+      {
+        "fieldName": "widget_channel_id?",
+        "fieldType": "?snowflake",
+        "description": "the channel id that the widget will generate an invite to, or null if set to no invite"
+      },
+      {
+        "fieldName": "verification_level",
+        "fieldType": "integer",
+        "description": "verification level required for the guild"
+      },
+      {
+        "fieldName": "default_message_notifications",
+        "fieldType": "integer",
+        "description": "default message notifications level"
+      },
+      {
+        "fieldName": "explicit_content_filter",
+        "fieldType": "integer",
+        "description": "explicit content filter level"
+      },
+      {
+        "fieldName": "roles",
+        "fieldType": "array of role objects",
+        "description": "roles in the guild"
+      },
+      {
+        "fieldName": "emojis",
+        "fieldType": "array of emoji objects",
+        "description": "custom guild emojis"
+      },
+      {
+        "fieldName": "features",
+        "fieldType": "array of guild feature strings",
+        "description": "enabled guild features"
+      },
+      {
+        "fieldName": "mfa_level",
+        "fieldType": "integer",
+        "description": "required MFA level for the guild"
+      },
+      {
+        "fieldName": "application_id",
+        "fieldType": "?snowflake",
+        "description": "application id of the guild creator if it is bot-created"
+      },
+      {
+        "fieldName": "system_channel_id",
+        "fieldType": "?snowflake",
+        "description": "the id of the channel where guild notices such as welcome messages and boost events are posted"
+      },
+      {
+        "fieldName": "system_channel_flags",
+        "fieldType": "integer",
+        "description": "system channel flags"
+      },
+      {
+        "fieldName": "rules_channel_id",
+        "fieldType": "?snowflake",
+        "description": "the id of the channel where Community guilds can display rules and/or guidelines"
+      },
+      {
+        "fieldName": "joined_at? *",
+        "fieldType": "ISO8601 timestamp",
+        "description": "when this guild was joined at"
+      },
+      {
+        "fieldName": "large? *",
+        "fieldType": "boolean",
+        "description": "true if this is considered a large guild"
+      },
+      {
+        "fieldName": "unavailable? *",
+        "fieldType": "boolean",
+        "description": "true if this guild is unavailable due to an outage"
+      },
+      {
+        "fieldName": "member_count? *",
+        "fieldType": "integer",
+        "description": "total number of members in this guild"
+      },
+      {
+        "fieldName": "voice_states? *",
+        "fieldType": "array of partial voice state objects",
+        "description": "states of members currently in voice channels; lacks the guild_id key"
+      },
+      {
+        "fieldName": "members? *",
+        "fieldType": "array of guild member objects",
+        "description": "users in the guild"
+      },
+      {
+        "fieldName": "channels? *",
+        "fieldType": "array of channel objects",
+        "description": "channels in the guild"
+      },
+      {
+        "fieldName": "threads? *",
+        "fieldType": "array of channel objects",
+        "description": "all active threads in the guild that current user has permission to view"
+      },
+      {
+        "fieldName": "presences? *",
+        "fieldType": "array of partial presence update objects",
+        "description": "presences of the members in the guild, will only include non-offline members if the size is greater than large threshold"
+      },
+      {
+        "fieldName": "max_presences?",
+        "fieldType": "?integer",
+        "description": "the maximum number of presences for the guild (null is always returned, apart from the largest of guilds)"
+      },
+      {
+        "fieldName": "max_members?",
+        "fieldType": "integer",
+        "description": "the maximum number of members for the guild"
+      },
+      {
+        "fieldName": "vanity_url_code",
+        "fieldType": "?string",
+        "description": "the vanity url code for the guild"
+      },
+      {
+        "fieldName": "description",
+        "fieldType": "?string",
+        "description": "the description of a Community guild"
+      },
+      {
+        "fieldName": "banner",
+        "fieldType": "?string",
+        "description": "banner hash"
+      },
+      {
+        "fieldName": "premium_tier",
+        "fieldType": "integer",
+        "description": "premium tier (Server Boost level)"
+      },
+      {
+        "fieldName": "premium_subscription_count?",
+        "fieldType": "integer",
+        "description": "the number of boosts this guild currently has"
+      },
+      {
+        "fieldName": "preferred_locale",
+        "fieldType": "string",
+        "description": "the preferred locale of a Community guild; used in server discovery and notices from Discord; defaults to \"en-US\""
+      },
+      {
+        "fieldName": "public_updates_channel_id",
+        "fieldType": "?snowflake",
+        "description": "the id of the channel where admins and moderators of Community guilds receive notices from Discord"
+      },
+      {
+        "fieldName": "max_video_channel_users?",
+        "fieldType": "integer",
+        "description": "the maximum amount of users in a video channel"
+      },
+      {
+        "fieldName": "approximate_member_count?",
+        "fieldType": "integer",
+        "description": "approximate number of members in this guild, returned from the GET /guilds/<id> endpoint when with_counts is true"
+      },
+      {
+        "fieldName": "approximate_presence_count?",
+        "fieldType": "integer",
+        "description": "approximate number of non-offline members in this guild, returned from the GET /guilds/<id> endpoint when with_counts is true"
+      },
+      {
+        "fieldName": "welcome_screen?",
+        "fieldType": "welcome screen object",
+        "description": "the welcome screen of a Community guild, shown to new members, returned in an Invite's guild object"
+      },
+      {
+        "fieldName": "nsfw_level",
+        "fieldType": "integer",
+        "description": "guild NSFW level"
+      },
+      {
+        "fieldName": "stage_instances? *",
+        "fieldType": "array of stage instance objects",
+        "description": "Stage instances in the guild"
+      },
+      {
+        "fieldName": "stickers?",
+        "fieldType": "array of sticker objects",
+        "description": "custom guild stickers"
+      }
+    ]
+  },
+  {
+    "type": "numbered_enum",
+    "name": "guild-object-default-message-notification-level",
+    "items": [
+      {
+        "name": "ALL_MESSAGES",
+        "value": 0,
+        "description": "members will receive notifications for all messages by default"
+      },
+      {
+        "name": "ONLY_MENTIONS",
+        "value": 1,
+        "description": "members will receive notifications only for messages that @mention them by default"
+      }
+    ]
+  },
+  {
+    "type": "numbered_enum",
+    "name": "guild-object-explicit-content-filter-level",
+    "items": [
+      {
+        "name": "DISABLED",
+        "value": 0,
+        "description": "media content will not be scanned"
+      },
+      {
+        "name": "MEMBERS_WITHOUT_ROLES",
+        "value": 1,
+        "description": "media content sent by members without roles will be scanned"
+      },
+      {
+        "name": "ALL_MEMBERS",
+        "value": 2,
+        "description": "media content sent by all members will be scanned"
+      }
+    ]
+  },
+  {
+    "type": "numbered_enum",
+    "name": "guild-object-mfa-level",
+    "items": [
+      {
+        "name": "NONE",
+        "value": 0,
+        "description": "guild has no MFA/2FA requirement for moderation actions"
+      },
+      {
+        "name": "ELEVATED",
+        "value": 1,
+        "description": "guild has a 2FA requirement for moderation actions"
+      }
+    ]
+  },
+  {
+    "type": "numbered_enum",
+    "name": "guild-object-verification-level",
+    "items": [
+      {
+        "name": "NONE",
+        "value": 0,
+        "description": "unrestricted"
+      },
+      {
+        "name": "LOW",
+        "value": 1,
+        "description": "must have verified email on account"
+      },
+      {
+        "name": "MEDIUM",
+        "value": 2,
+        "description": "must be registered on Discord for longer than 5 minutes"
+      },
+      {
+        "name": "HIGH",
+        "value": 3,
+        "description": "must be a member of the server for longer than 10 minutes"
+      },
+      {
+        "name": "VERY_HIGH",
+        "value": 4,
+        "description": "must have a verified phone number"
+      }
+    ]
+  },
+  {
+    "type": "numbered_enum",
+    "name": "guild-object-guild-nsfw-level",
+    "items": [
+      {
+        "name": "DEFAULT",
+        "value": 0
+      },
+      {
+        "name": "EXPLICIT",
+        "value": 1
+      },
+      {
+        "name": "SAFE",
+        "value": 2
+      },
+      {
+        "name": "AGE_RESTRICTED",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "type": "numbered_enum",
+    "name": "guild-object-premium-tier",
+    "items": [
+      {
+        "name": "NONE",
+        "value": 0,
+        "description": "guild has not unlocked any Server Boost perks"
+      },
+      {
+        "name": "TIER_1",
+        "value": 1,
+        "description": "guild has unlocked Server Boost level 1 perks"
+      },
+      {
+        "name": "TIER_2",
+        "value": 2,
+        "description": "guild has unlocked Server Boost level 2 perks"
+      },
+      {
+        "name": "TIER_3",
+        "value": 3,
+        "description": "guild has unlocked Server Boost level 3 perks"
+      }
+    ]
+  },
+  {
+    "type": "flags",
+    "name": "guild-object-system-channel-flags",
+    "flags": [
+      {
+        "bit": 0,
+        "name": "SUPPRESS_JOIN_NOTIFICATIONS",
+        "description": "Suppress member join notifications"
+      },
+      {
+        "bit": 1,
+        "name": "SUPPRESS_PREMIUM_SUBSCRIPTIONS",
+        "description": "Suppress server boost notifications"
+      },
+      {
+        "bit": 2,
+        "name": "SUPPRESS_GUILD_REMINDER_NOTIFICATIONS",
+        "description": "Suppress server setup tips"
+      }
+    ]
+  },
+  {
+    "type": "structure",
+    "name": "guild-preview-object-guild-preview-structure",
+    "items": [
+      {
+        "fieldName": "id",
+        "fieldType": "snowflake",
+        "description": "guild id"
+      },
+      {
+        "fieldName": "name",
+        "fieldType": "string",
+        "description": "guild name (2-100 characters)"
+      },
+      {
+        "fieldName": "icon",
+        "fieldType": "?string",
+        "description": "icon hash"
+      },
+      {
+        "fieldName": "splash",
+        "fieldType": "?string",
+        "description": "splash hash"
+      },
+      {
+        "fieldName": "discovery_splash",
+        "fieldType": "?string",
+        "description": "discovery splash hash"
+      },
+      {
+        "fieldName": "emojis",
+        "fieldType": "array of emoji objects",
+        "description": "custom guild emojis"
+      },
+      {
+        "fieldName": "features",
+        "fieldType": "array of guild feature strings",
+        "description": "enabled guild features"
+      },
+      {
+        "fieldName": "approximate_member_count",
+        "fieldType": "integer",
+        "description": "approximate number of members in this guild"
+      },
+      {
+        "fieldName": "approximate_presence_count",
+        "fieldType": "integer",
+        "description": "approximate number of online members in this guild"
+      },
+      {
+        "fieldName": "description",
+        "fieldType": "?string",
+        "description": "the description for the guild, if the guild is discoverable"
+      }
+    ]
+  },
+  {
+    "type": "structure",
+    "name": "guild-widget-object-guild-widget-structure",
+    "items": [
+      {
+        "fieldName": "enabled",
+        "fieldType": "boolean",
+        "description": "whether the widget is enabled"
+      },
+      {
+        "fieldName": "channel_id",
+        "fieldType": "?snowflake",
+        "description": "the widget channel id"
+      }
+    ]
+  },
+  {
+    "type": "structure",
+    "name": "guild-member-object-guild-member-structure",
+    "items": [
+      {
+        "fieldName": "user?",
+        "fieldType": "user object",
+        "description": "the user this guild member represents"
+      },
+      {
+        "fieldName": "nick?",
+        "fieldType": "?string",
+        "description": "this users guild nickname"
+      },
+      {
+        "fieldName": "roles",
+        "fieldType": "array of snowflakes",
+        "description": "array of role object ids"
+      },
+      {
+        "fieldName": "joined_at",
+        "fieldType": "ISO8601 timestamp",
+        "description": "when the user joined the guild"
+      },
+      {
+        "fieldName": "premium_since?",
+        "fieldType": "?ISO8601 timestamp",
+        "description": "when the user started boosting the guild"
+      },
+      {
+        "fieldName": "deaf",
+        "fieldType": "boolean",
+        "description": "whether the user is deafened in voice channels"
+      },
+      {
+        "fieldName": "mute",
+        "fieldType": "boolean",
+        "description": "whether the user is muted in voice channels"
+      },
+      {
+        "fieldName": "pending?",
+        "fieldType": "boolean",
+        "description": "whether the user has not yet passed the guild's Membership Screening requirements"
+      },
+      {
+        "fieldName": "permissions?",
+        "fieldType": "string",
+        "description": "total permissions of the member in the channel, including overwrites, returned when in the interaction object"
+      }
+    ]
+  },
+  {
+    "type": "structure",
+    "name": "integration-object-integration-structure",
+    "items": [
+      {
+        "fieldName": "id",
+        "fieldType": "snowflake",
+        "description": "integration id"
+      },
+      {
+        "fieldName": "name",
+        "fieldType": "string",
+        "description": "integration name"
+      },
+      {
+        "fieldName": "type",
+        "fieldType": "string",
+        "description": "integration type (twitch, youtube, or discord)"
+      },
+      {
+        "fieldName": "enabled",
+        "fieldType": "boolean",
+        "description": "is this integration enabled"
+      },
+      {
+        "fieldName": "syncing? *",
+        "fieldType": "boolean",
+        "description": "is this integration syncing"
+      },
+      {
+        "fieldName": "role_id? *",
+        "fieldType": "snowflake",
+        "description": "id that this integration uses for \"subscribers\""
+      },
+      {
+        "fieldName": "enable_emoticons? *",
+        "fieldType": "boolean",
+        "description": "whether emoticons should be synced for this integration (twitch only currently)"
+      },
+      {
+        "fieldName": "expire_behavior? *",
+        "fieldType": "integration expire behavior",
+        "description": "the behavior of expiring subscribers"
+      },
+      {
+        "fieldName": "expire_grace_period? *",
+        "fieldType": "integer",
+        "description": "the grace period (in days) before expiring subscribers"
+      },
+      {
+        "fieldName": "user? *",
+        "fieldType": "user object",
+        "description": "user for this integration"
+      },
+      {
+        "fieldName": "account",
+        "fieldType": "account object",
+        "description": "integration account information"
+      },
+      {
+        "fieldName": "synced_at? *",
+        "fieldType": "ISO8601 timestamp",
+        "description": "when this integration was last synced"
+      },
+      {
+        "fieldName": "subscriber_count? *",
+        "fieldType": "integer",
+        "description": "how many subscribers this integration has"
+      },
+      {
+        "fieldName": "revoked? *",
+        "fieldType": "boolean",
+        "description": "has this integration been revoked"
+      },
+      {
+        "fieldName": "application?",
+        "fieldType": "application object",
+        "description": "The bot/OAuth2 application for discord integrations"
+      }
+    ]
+  },
+  {
+    "type": "numbered_enum",
+    "name": "integration-object-integration-expire-behaviors",
+    "items": [
+      {
+        "name": "Remove role",
+        "value": 0
+      },
+      {
+        "name": "Kick",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "type": "structure",
+    "name": "integration-account-object-integration-account-structure",
+    "items": [
+      {
+        "fieldName": "id",
+        "fieldType": "string",
+        "description": "id of the account"
+      },
+      {
+        "fieldName": "name",
+        "fieldType": "string",
+        "description": "name of the account"
+      }
+    ]
+  },
+  {
+    "type": "structure",
+    "name": "integration-application-object-integration-application-structure",
+    "items": [
+      {
+        "fieldName": "id",
+        "fieldType": "snowflake",
+        "description": "the id of the app"
+      },
+      {
+        "fieldName": "name",
+        "fieldType": "string",
+        "description": "the name of the app"
+      },
+      {
+        "fieldName": "icon",
+        "fieldType": "?string",
+        "description": "the icon hash of the app"
+      },
+      {
+        "fieldName": "description",
+        "fieldType": "string",
+        "description": "the description of the app"
+      },
+      {
+        "fieldName": "summary",
+        "fieldType": "string",
+        "description": "the summary of the app"
+      },
+      {
+        "fieldName": "bot?",
+        "fieldType": "user object",
+        "description": "the bot associated with this application"
+      }
+    ]
+  },
+  {
+    "type": "structure",
+    "name": "ban-object-ban-structure",
+    "items": [
+      {
+        "fieldName": "reason",
+        "fieldType": "?string",
+        "description": "the reason for the ban"
+      },
+      {
+        "fieldName": "user",
+        "fieldType": "user object",
+        "description": "the banned user"
+      }
+    ]
+  },
+  {
+    "type": "structure",
+    "name": "welcome-screen-object-welcome-screen-structure",
+    "items": [
+      {
+        "fieldName": "description",
+        "fieldType": "?string",
+        "description": "the server description shown in the welcome screen"
+      },
+      {
+        "fieldName": "welcome_channels",
+        "fieldType": "array of welcome screen channel objects",
+        "description": "the channels shown in the welcome screen, up to 5"
+      }
+    ]
+  },
+  {
+    "type": "structure",
+    "name": "welcome-screen-object-welcome-screen-channel-structure",
+    "items": [
+      {
+        "fieldName": "channel_id",
+        "fieldType": "snowflake",
+        "description": "the channel's id"
+      },
+      {
+        "fieldName": "description",
+        "fieldType": "string",
+        "description": "the description shown for the channel"
+      },
+      {
+        "fieldName": "emoji_id",
+        "fieldType": "?snowflake",
+        "description": "the emoji id, if the emoji is custom"
+      },
+      {
+        "fieldName": "emoji_name",
+        "fieldType": "?string",
+        "description": "the emoji name if custom, the unicode character if standard, or null if no emoji is set"
+      }
+    ]
+  },
+  {
+    "type": "structure",
+    "name": "list-active-threads-response-body",
+    "items": [
+      {
+        "fieldName": "threads",
+        "fieldType": "array of channel objects",
+        "description": "the active threads"
+      },
+      {
+        "fieldName": "members",
+        "fieldType": "array of thread members objects",
+        "description": "a thread member object for each returned thread the current user has joined"
+      }
+    ]
+  }
+]
